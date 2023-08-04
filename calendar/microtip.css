@@ -1,23 +1,3 @@
-/* -------------------------------------------------------------------
-  Microtip
-
-  Modern, lightweight css-only tooltips
-  Just 1kb minified and gzipped
-
-  @author Ghosh
-  @package Microtip
-
-----------------------------------------------------------------------
-  1. Base Styles
-  2. Direction Modifiers
-  3. Position Modifiers
---------------------------------------------------------------------*/
-
-
-/* ------------------------------------------------
-  [1] Base Styles
--------------------------------------------------*/
-
 [aria-label][role~="tooltip"] {
   position: relative;
 }
@@ -63,12 +43,6 @@
   pointer-events: auto;
 }
 
-
-
-/* ------------------------------------------------
-  [2] Position Modifiers
--------------------------------------------------*/
-
 [role~="tooltip"][data-microtip-position|="top"]::before {
   background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2236px%22%20height%3D%2212px%22%3E%3Cpath%20fill%3D%22rgba%2817,%2017,%2017,%200.9%29%22%20transform%3D%22rotate%280%29%22%20d%3D%22M2.658,0.000%20C-13.615,0.000%2050.938,0.000%2034.662,0.000%20C28.662,0.000%2023.035,12.002%2018.660,12.002%20C14.285,12.002%208.594,0.000%202.658,0.000%20Z%22/%3E%3C/svg%3E") no-repeat;
   height: 6px;
@@ -100,9 +74,6 @@
   transform: translate3d(-50%, -5px, 0);
 }
 
-/* ------------------------------------------------
-  [2.1] Top Left
--------------------------------------------------*/
 [role~="tooltip"][data-microtip-position="top-left"]::after {
   transform: translate3d(calc(-100% + 16px), 0, 0);
   bottom: 100%;
@@ -112,10 +83,6 @@
   transform: translate3d(calc(-100% + 16px), -5px, 0);
 }
 
-
-/* ------------------------------------------------
-  [2.2] Top Right
--------------------------------------------------*/
 [role~="tooltip"][data-microtip-position="top-right"]::after {
   transform: translate3d(calc(0% + -16px), 0, 0);
   bottom: 100%;
@@ -125,10 +92,6 @@
   transform: translate3d(calc(0% + -16px), -5px, 0);
 }
 
-
-/* ------------------------------------------------
-  [2.3] Bottom
--------------------------------------------------*/
 [role~="tooltip"][data-microtip-position|="bottom"]::before {
   background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2236px%22%20height%3D%2212px%22%3E%3Cpath%20fill%3D%22rgba%2817,%2017,%2017,%200.9%29%22%20transform%3D%22rotate%28180%2018%206%29%22%20d%3D%22M2.658,0.000%20C-13.615,0.000%2050.938,0.000%2034.662,0.000%20C28.662,0.000%2023.035,12.002%2018.660,12.002%20C14.285,12.002%208.594,0.000%202.658,0.000%20Z%22/%3E%3C/svg%3E") no-repeat;
   height: 6px;
@@ -162,10 +125,6 @@
   transform: translate3d(-50%, 0, 0);
 }
 
-
-/* ------------------------------------------------
-  [2.4] Bottom Left
--------------------------------------------------*/
 [role~="tooltip"][data-microtip-position="bottom-left"]::after {
   transform: translate3d(calc(-100% + 16px), -10px, 0);
   top: 100%;
@@ -175,10 +134,6 @@
   transform: translate3d(calc(-100% + 16px), 0, 0);
 }
 
-
-/* ------------------------------------------------
-  [2.5] Bottom Right
--------------------------------------------------*/
 [role~="tooltip"][data-microtip-position="bottom-right"]::after {
   transform: translate3d(calc(0% + -16px), -10px, 0);
   top: 100%;
@@ -188,10 +143,6 @@
   transform: translate3d(calc(0% + -16px), 0, 0);
 }
 
-
-/* ------------------------------------------------
-  [2.6] Left
--------------------------------------------------*/
 [role~="tooltip"][data-microtip-position="left"]::before,
 [role~="tooltip"][data-microtip-position="left"]::after {
   bottom: auto;
@@ -218,10 +169,6 @@
   transform: translate3d(0, -50%, 0);
 }
 
-
-/* ------------------------------------------------
-  [2.7] Right
--------------------------------------------------*/
 [role~="tooltip"][data-microtip-position="right"]::before,
 [role~="tooltip"][data-microtip-position="right"]::after {
   bottom: auto;
@@ -247,9 +194,6 @@
   transform: translate3d(0, -50%, 0);
 }
 
-/* ------------------------------------------------
-  [3] Size
--------------------------------------------------*/
 [role~="tooltip"][data-microtip-size="small"]::after {
   white-space: initial;
   width: 80px;
