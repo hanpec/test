@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>calendar</title>
+  <link rel="stylesheet" href="./calendar/microtip.css">
+  <script src="./calendar/holiday2030.js"></script>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+    th, td {
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      font-weight: bold;
+      border: 1px solid black;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .today {
+      background-color: yellow;
+    }
+    .holiday {
+      color: red !important;
+      background-color: lightgreen;
+    }
+    .saturday, tr *:last-child {
+      color: blue;
+    }
+    .sunday,  tr *:first-child {
+      color: red;
+    }
+    .prev-month, .next-month {
+      color: gray !important;
+      font-size: x-small;
+    }
+    #prev, #next {
+          position: relative;
+          top: 6px;
+    }
+        #prev {
+          float: left; /* 先月ボタンを左寄せにする */
+        }
+        #next {
+          float: right; /* 来月ボタンを右寄せにする */
+        }
+    }
+  </style>
+</head>
+<body>
+  <!-- カレンダーを表示するテーブル -->
+  <table id="calendar"><caption>
+  <h1>万年カレンダー</h1>
+  <!-- 先月と来月に移動するボタン -->
+    <button id="prev" aria-label="先月" role="tooltip" data-microtip-position="bottom">＜</button>
+    <!-- 年と月を表示する見出し -->
+    <span id="year-month" style="font-size: x-large">2023年8月</span>
+    <button id="next" aria-label="来月" role="tooltip" data-microtip-position="bottom">＞</button>
+  </caption><thead> 
+    <!-- 曜日を表示する行 -->
+    <tr>
+      <th>日</th>
+      <th>月</th>
+      <th>火</th>
+      <th>水</th>
+      <th>木</th>
+      <th>金</th>
+      <th>土</th>
+    </tr></thead>
+    <!-- 日付を表示する行 -->
+    <tbody id="dates"><tr><td class="prev-month">30</td><td class="prev-month">31</td><td>1</td><td>2</td><td>3</td><td aria-label="本日" role="tooltip" data-microtip-position="bottom" class=" today">4</td><td>5</td></tr><tr><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td aria-label="山の日" role="tooltip" data-microtip-position="bottom" class=" holiday">11</td><td>12</td></tr><tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td><td>19</td></tr><tr><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td><td>26</td></tr><tr><td>27</td><td>28</td><td>29</td><td>30</td><td>31</td><td class="next-month">1</td><td class="next-month">2</td></tr></tbody>
+    <!-- JavaScriptで動的に生成する -->
+  </table>
+
+  <script>
+    // 現在の年月を取得
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+
+    // 年月を表示する関数
+    function showYearMonth() {
+      let yearMonth = document.getElementById("year-month");
+      yearMonth.textContent = year + "年" + month + "月";
+    }
+
+    // カレンダーを作成する関数
+    function createCalendar() {
+      showYearMonth();
+      // カレンダーのテーブルを取得
+      let calendar = document.getElementById("dates");
+      // テーブルの内容を空にする
+      calendar.innerHTML = "";
+      // 日付の行を作成
+      let dateRow = document.createElement("tr");
+      // 当月の最初の日と最後の日を取得
+      let firstDate = new Date(year, month - 1, 1);
+      let lastDate = new Date(year, month, 0);
+      // 前月の最後の日を取得
+      let prevLastDate = new Date(year, month - 1, 0);
+      
+      // 当月の最初の日まで前月の日付で埋める
+      for (let i = firstDate.getDay(); i > 0; i--) {
+        let dateCell = document.createElement("td");
+        dateCell.textContent = prevLastDate.getDate() - i + 1;
+        dateCell.className = "prev-month";
+        dateRow.appendChild(dateCell);
+      }
+      
+      // 当月の日付を表示する
+      for (let i = 1; i <= lastDate.getDate(); i++) {
+        let dateCell = document.createElement("td");
+        dateCell.textContent = i;
+        // 日付に対応するDateオブジェクトを作成
+        let dateObj = new Date(year, month - 1, i);
+        // noteDay関数で本日や祝日を判定する
+        let noteDayResult = noteDay(dateObj);
+        if (noteDayResult != "") {
+          // microtip.cssでヒントを表示する
+          dateCell.setAttribute("aria-label", noteDayResult);
+          dateCell.setAttribute("role", "tooltip");
+          dateCell.setAttribute("data-microtip-position", "bottom");
+          if (noteDayResult == "本日") {
+            dateCell.className += " today";
+          } else {
+            dateCell.className += " holiday";
+          }
+        }
+        dateRow.appendChild(dateCell);
+        // 7日ごとに改行する
+        if (dateObj.getDay() == 6) {
+          calendar.appendChild(dateRow);
+          dateRow = document.createElement("tr");
+        }
+      }
+      
+      // 当月の最後の日から次月の日付で埋める
+      for (let i = 1; i <= 6 - lastDate.getDay(); i++) {
+        let dateCell = document.createElement("td");
+        dateCell.textContent = i;
+        dateCell.className = "next-month";
+        dateRow.appendChild(dateCell);
+      }
+      calendar.appendChild(dateRow);
+    }
+
+    // 先月ボタンを押したときの処理
+    function prevMonth() {
+      // 年月を更新する
+      if (month == 1) {
+        year--;
+        month = 12;
+      } else {
+        month--;
+      }
+      // 年月とカレンダーを表示する
+      createCalendar();
+    }
+
+    // 来月ボタンを押したときの処理
+    function nextMonth() {
+      // 年月を更新する
+      if (month == 12) {
+        year++;
+        month = 1;
+      } else {
+        month++;
+      }
+      // 年月とカレンダーを表示する
+      createCalendar();
+    }
+
+    // 初期表示
+    createCalendar();
+
+    // ボタンにイベントリスナーを登録する
+    let prevButton = document.getElementById("prev");
+    let nextButton = document.getElementById("next");
+    prevButton.addEventListener("click", prevMonth);
+    nextButton.addEventListener("click", nextMonth);
+  </script>
+
+</body></html>
