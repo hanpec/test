@@ -11,11 +11,8 @@ private_key = rsa.generate_private_key(
 public_key = private_key.public_key()
 
 # メッセージの暗号化
-<<<<<<< HEAD
 message = b"python"
-=======
 message = b"abc"
->>>>>>> work
 ciphertext = public_key.encrypt(
     message,
     padding.OAEP(
