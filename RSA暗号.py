@@ -11,7 +11,7 @@ private_key = rsa.generate_private_key(
 public_key = private_key.public_key()
 
 # メッセージの暗号化
-message = b"This is a pan,pbn,pcn,pdn,pen!"
+message = b"python"
 ciphertext = public_key.encrypt(
     message,
     padding.OAEP(
