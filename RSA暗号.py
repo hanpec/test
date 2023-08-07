@@ -11,7 +11,11 @@ private_key = rsa.generate_private_key(
 public_key = private_key.public_key()
 
 # メッセージの暗号化
+<<<<<<< HEAD
 message = b"python"
+=======
+message = b"abc"
+>>>>>>> work
 ciphertext = public_key.encrypt(
     message,
     padding.OAEP(
@@ -31,5 +35,5 @@ decrypted_message = private_key.decrypt(
     )
 )
 
-print("おりじなる めっせーじ：", message)
-print("復号化されたメッセージ：", decrypted_message.decode('utf-8'))
+print("original msg:", message)
+print("Decrypted Msg:", decrypted_message.decode('utf-8'))
