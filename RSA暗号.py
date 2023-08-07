@@ -11,7 +11,7 @@ private_key = rsa.generate_private_key(
 public_key = private_key.public_key()
 
 # メッセージの暗号化
-message = b"Hello, RSA!"
+message = b"xyz"
 ciphertext = public_key.encrypt(
     message,
     padding.OAEP(
