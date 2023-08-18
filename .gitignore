@@ -1,3 +1,5 @@
 .vscode
 text/
 cp932/
+model/
+model_transformers/
