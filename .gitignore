@@ -6,3 +6,5 @@ model_transformers/
 lightning_logs/
 chABSA-dataset/
 __MACOSX/
+model_BIO/
+ner-wikipedia-dataset/
