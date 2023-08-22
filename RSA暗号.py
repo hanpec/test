@@ -31,5 +31,5 @@ decrypted_message = private_key.decrypt(
     )
 )
 
-print("original msg:", message)
-print("Decrypted Msg:", decrypted_message.decode('utf-8'))
+print(f'original msg:{message}')
+print(f'Decrypted Msg:{decrypted_message.decode("utf-8")}')
