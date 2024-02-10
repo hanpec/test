@@ -1,0 +1,12 @@
+.vscode
+text/
+cp932/
+model/
+model_transformers/
+lightning_logs/
+chABSA-dataset/
+__MACOSX/
+model_BIO/
+ner-wikipedia-dataset/
+jwtd/
+chABSA-dataset.zip
