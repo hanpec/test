@@ -13,6 +13,7 @@ public_key = private_key.public_key()
 # メッセージの暗号化
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 message = b"abc"
 =======
 message = b"This is a pan,pbn,pcn,pdn,pen!"
@@ -20,6 +21,9 @@ message = b"This is a pan,pbn,pcn,pdn,pen!"
 =======
 message = b"abc"
 >>>>>>> 65a087a (abc)
+=======
+message = b"abc"
+>>>>>>> 9b790c8f2b132afafad43b0e9cf8438765847c4a
 ciphertext = public_key.encrypt(
     message,
     padding.OAEP(
